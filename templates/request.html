@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FE595 Midterm</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script></head><script>function myFunction() {
+var text1= $('#text1').val(), text2= $('#text2').val();
+  $.ajax({
+              url: "/join",
+              type: "POST",
+              data: {text1:text1, text2:text2}          }).done(function(response) {            var html= "<br><br><br><p> <b> RESULT : <b><p>";            response =response.result;
+                 $.each(response,function(key,val){
+                 console.log(val);
+                    html+="<p>"+val+"<p>"                });
+                html +="<br>";
+                $(".show-data").append(html);
+            });
+};  </script>
+<body>
+    <p>
+        Optional functions: Please enter the ticker symbol and separated by commas(','). And input 'analyze' in Function bar<br><br>
+        Text: <input type="text" id="text1" name="text1"><br><br>  
+        Function: <input type="text" id="text2" name="text2"><br><br>
+            <button id="clicked" onclick="myFunction()">Submit</button>
+        </p>
+    <div class="show-data" >    </div>
+</body>
+</html>
