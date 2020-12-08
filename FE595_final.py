@@ -43,16 +43,16 @@ def stock_analyze():
     strategy['market']=np.log(strategy['sp500']/strategy['sp500'].shift(1))#Calculate market returns
     strategy[['Market','Strategy']]=strategy[['market','strategy']].cumsum().apply(np.exp)#Calculate the total holding return of market and strategy
 
-    result=('策略持有最终收益:%s'%strategy['Market'][-1:],
-            '市场持有最终收益:%s'%strategy['Strategy'][-1:],
-            '市场平均收益：%s'%strategy['Market'].mean(),
-            '策略平均收益：%s'%strategy['Strategy'].mean(),
-            '策略最大收益：%s'%strategy['Strategy'].max(),
-            '市场最大收益：%s'%strategy['Market'].max(),
-            '市场单日最大回撤：%s'%strategy['market'].min(),
-            '策略单日最大回撤：%s'%strategy['strategy'].min(),
-            '策略波动率：%s'%strategy['Strategy'].std(),
-            '市场波动率：%s'%strategy['Market'].std())
+    result=('The strategy holds the ultimate payoff:%s'%strategy['Market'][-1:],
+            'The market holds the final yield:%s'%strategy['Strategy'][-1:],
+            'Average market return：%s'%strategy['Market'].mean(),
+            'Average return on strategy：%s'%strategy['Strategy'].mean(),
+            'Maximum return on strategy：%s'%strategy['Strategy'].max(),
+            'Maximum market return：%s'%strategy['Market'].max(),
+            'The biggest one-day pullback in the market：%s'%strategy['market'].min(),
+            'Strategy maximum pullback in one day：%s'%strategy['strategy'].min(),
+            'Strategic volatility：%s'%strategy['Strategy'].std(),
+            'Market volatility：%s'%strategy['Market'].std())
     return result
 
 
