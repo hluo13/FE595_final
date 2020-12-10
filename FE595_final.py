@@ -14,7 +14,7 @@ def stock_analyze():
     company_list = input_text.split(",")
     df=pd.DataFrame()
     for i in company_list:
-        df[i]=pdr.DataReader(i,data_source='yahoo',start='2015/1/1',end='2020/3/31')['Close']#get the close price
+        df[i]=pdr.DataReader(i,data_source='yahoo',start='2015/1/1',end='2020/12/6')['Close']#get the close price
         
         d42=pd.DataFrame()
         d252=pd.DataFrame()
@@ -39,20 +39,20 @@ def stock_analyze():
         strategy['strategy']=strategy.sum(axis=1)#Calculate the total return on holdings
         
     strategy.tail()
-    strategy['sp500']=pdr.DataReader('^GSPC',data_source='yahoo',start='2015/1/1',end='2020/3/31')['Close']#Benchmark closing price
+    strategy['sp500']=pdr.DataReader('^GSPC',data_source='yahoo',start='2015/1/1',end='2020/12/6')['Close']#Benchmark closing price
     strategy['market']=np.log(strategy['sp500']/strategy['sp500'].shift(1))#Calculate market returns
     strategy[['Market','Strategy']]=strategy[['market','strategy']].cumsum().apply(np.exp)#Calculate the total holding return of market and strategy
 
-    result=('策略持有最终收益:%s'%strategy['Market'][-1:],
-            '市场持有最终收益:%s'%strategy['Strategy'][-1:],
-            '市场平均收益：%s'%strategy['Market'].mean(),
-            '策略平均收益：%s'%strategy['Strategy'].mean(),
-            '策略最大收益：%s'%strategy['Strategy'].max(),
-            '市场最大收益：%s'%strategy['Market'].max(),
-            '市场单日最大回撤：%s'%strategy['market'].min(),
-            '策略单日最大回撤：%s'%strategy['strategy'].min(),
-            '策略波动率：%s'%strategy['Strategy'].std(),
-            '市场波动率：%s'%strategy['Market'].std())
+    result=['\n The market holding final return:%s'%strategy['Market'][-1:],
+            '\n The strategy holding final return:%s'%strategy['Strategy'][-1:],
+            '\n Average market return：%s'%strategy['Market'].mean(),
+            '\n Average strategy return：%s'%strategy['Strategy'].mean(),
+            '\n Maximum strategy return：%s'%strategy['Strategy'].max(),
+            '\n Maximum market return：%s'%strategy['Market'].max(),
+            '\n Market maximum pullback in one day：%s'%strategy['market'].min(),
+            '\n Strategy maximum pullback in one day：%s'%strategy['strategy'].min(),
+            '\n Strategy volatility：%s'%strategy['Strategy'].std(),
+            '\n Market volatility：%s'%strategy['Market'].std()]
     return result
 
 
