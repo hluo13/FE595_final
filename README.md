@@ -12,3 +12,7 @@ Market maximum pullback in one day,
 Strategy maximum pullback in one day,    
 Strategy volatility,    
 Market volatility.   
+**Website description**:  
+This website is used to calculate the return on holding a stock of your choice (entered on the site) over a period of time and to compare this return with market returns.  
+By intuitively presenting the average return, maximum return, volatility and market average return, maximum return and volatility of your selected stock, let you know whether your stock selection can meet your basic requirements for return and risk, so as to provide some help for your stock selection in the future.  
+Note: the website only supports the input of Yahoo Finance Stock code, not the full name of stock.
